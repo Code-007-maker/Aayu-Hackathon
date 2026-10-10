@@ -351,7 +351,7 @@ export function evaluateTriage(inputs: PatientInputs): TriageResult {
   // Routine Check
   // "Routine ONLY if every selected symptom is low-acuity AND age 5-64 AND not pregnant AND no high risk AND alert AND pain<=4 AND no rule fired AND (vitals missing or NEWS2=0)"
   const allowLowAcuity = true; // Admin setting in real life
-  if (allowLowAcuity && priority === 'Soon' && firedRules.length === 1 && firedRules[0] === 'Baseline') {
+  if (allowLowAcuity && (priority as string) === 'Soon' && firedRules.length === 1 && firedRules[0] === 'Baseline') {
     const isLowRiskDemographics = inputs.ageYears >= 5 && inputs.ageYears <= 64 && !isPregnant && !cond.diabetes && !cond.heartDisease && !cond.lungDisease && !cond.kidneyDisease && !cond.immunosuppressed && !cond.onBloodThinners && inputs.consciousness === 'alert' && (inputs.painScore || 0) <= 4;
     
     const lowAcuitySymptoms = ['joint_pain', 'skin_rash', 'back_pain', 'cough', 'headache', 'abdominal_pain', 'diarrhoea', 'minor_skin', ...SAFE_LIST_TAGS];
@@ -370,7 +370,7 @@ export function evaluateTriage(inputs: PatientInputs): TriageResult {
 
   // Modifiers
   if (priority === 'Routine') {
-    if (inputs.ageYears >= 65 || cond.diabetes || cond.heartDisease || cond.lungDisease || cond.immunosuppression) {
+    if (inputs.ageYears >= 65 || cond.diabetes || cond.heartDisease || cond.lungDisease || cond.immunosuppressed) {
       raise('Soon', 'Modifier', 'high risk condition modifier');
     }
   }
@@ -405,7 +405,7 @@ export function evaluateTriage(inputs: PatientInputs): TriageResult {
   };
 }
 
-export function calculateUrgencyScore(priority: Priority, news2: number, age: number, cond: any, pain: number, waitMins: number, flags: string[]): number {
+export function calculateUrgencyScore(priority: Priority, news2: number, age: number, cond: any, pain: number, waitMins: number, _flags?: string[]): number {
   let score = 0;
   if (priority === 'Immediate') score += 100;
   else if (priority === 'Soon') score += 50;

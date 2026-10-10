@@ -130,7 +130,7 @@ export function parseDuration(text: string): string | null {
 
 export function matchLexicon(transcript: string) {
   const norm = normalizeText(transcript);
-  const words = norm.split(' '); // For boundary checking
+  const _words = norm.split(' '); // For boundary checking (reserved for future use)
   const matches: { tag: string, phrase: string }[] = [];
   
   // Sort phrases by length (longest first) across all tags

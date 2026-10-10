@@ -24,7 +24,11 @@ export function QRCode({ value, size = 128, className = '' }: QRProps) {
 
   useEffect(() => {
     import('qrcode.react')
-      .then((mod) => setQRCmp(() => mod.QRCodeSVG || mod.default?.QRCodeSVG || mod.default))
+      .then((mod) => {
+        // qrcode.react v4 exports QRCodeSVG as a named export
+        const Cmp = (mod as any).QRCodeSVG ?? (mod as any).default;
+        setQRCmp(() => Cmp);
+      })
       .catch(() => setFailed(true));
   }, []);
 

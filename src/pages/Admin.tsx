@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth, User, Role } from '../store/auth';
+import { useAuth, Role } from '../store/auth';
 import { useStore } from '../store/store';
 import { useToast } from '../components/Toast';
 import { ShieldCheck, UserPlus, Users, KeyRound, Ban, CheckCircle, Copy, Settings, Globe } from 'lucide-react';
@@ -18,7 +18,7 @@ export default function Admin() {
   const { toast } = useToast();
 
   const [showCreate, setShowCreate] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', role: 'doctor' as Role });
+  const [form, setForm] = useState({ name: '', email: '', role: 'doctor' as Role, active: true });
   const [tempPass, setTempPass] = useState<{ id: string; pass: string } | null>(null);
   const [tab, setTab] = useState<'users' | 'settings'>('users');
   const [baseUrl, setBaseUrl] = useState(settings.publicBaseUrl || '');
@@ -38,7 +38,7 @@ export default function Admin() {
       }
       toast(`User ${u.name} created`, 'success');
       setShowCreate(false);
-      setForm({ name: '', email: '', role: 'doctor' });
+      setForm({ name: '', email: '', role: 'doctor', active: true });
     } catch (err: any) {
       toast(err.message, 'error');
     }

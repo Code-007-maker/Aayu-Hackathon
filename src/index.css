@@ -1,0 +1,194 @@
+/* OPD Flow – Global Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ─────────────────────────────── */
+:root {
+  --primary:   #0E7C86;
+  --primary-h: #0B6770;
+  --ink:       #12324A;
+  --secondary: #4A5B6B;
+  --surface:   #F4F9FB;
+  --card:      #FFFFFF;
+  --border:    #D6E4EA;
+  --link:      #2563EB;
+
+  /* Priority colours */
+  --imm:      #C62F2F;
+  --imm-soft: #FCE6E3;
+  --soon:     #B7740A;
+  --soon-soft:#FBEFD6;
+  --rout:     #23764E;
+  --rout-soft:#E0F2E8;
+
+  --radius-sm: 8px;
+  --radius:    12px;
+  --radius-lg: 16px;
+}
+
+/* ── Base ──────────────────────────────────────── */
+@layer base {
+  html { font-family: 'Plus Jakarta Sans', 'Inter', 'Noto Sans Devanagari', system-ui, sans-serif; }
+  body { @apply bg-[#F4F9FB] text-[#12324A]; }
+  
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* Smooth focus ring */
+  :focus-visible { @apply outline-none ring-2 ring-[#0E7C86] ring-offset-2 ring-offset-white; }
+}
+
+/* ── Components ────────────────────────────────── */
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0E7C86] hover:bg-[#0B6770] text-white font-bold rounded-xl transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white hover:bg-[#F4F9FB] border border-[#D6E4EA] text-[#12324A] font-bold rounded-xl transition-all duration-150 active:scale-[0.98];
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#C62F2F] hover:bg-[#a82929] text-white font-bold rounded-xl transition-all duration-150 active:scale-[0.98] disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 text-[#4A5B6B] hover:bg-[#F4F9FB] rounded-lg transition-all duration-150;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white border border-[#D6E4EA] rounded-2xl shadow-sm;
+  }
+  .card-header {
+    @apply px-6 py-4 border-b border-[#D6E4EA] flex items-center justify-between;
+  }
+
+  /* Inputs */
+  .input-field {
+    @apply w-full border border-[#D6E4EA] bg-white rounded-xl px-4 py-3 text-[#12324A] placeholder-[#4A5B6B]/50 focus:outline-none focus:ring-2 focus:ring-[#0E7C86] focus:border-transparent transition-all;
+  }
+
+  /* Priority badges */
+  .badge-immediate {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 bg-[#FCE6E3] text-[#C62F2F] font-bold text-xs rounded-lg;
+  }
+  .badge-soon {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 bg-[#FBEFD6] text-[#B7740A] font-bold text-xs rounded-lg;
+  }
+  .badge-routine {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 bg-[#E0F2E8] text-[#23764E] font-bold text-xs rounded-lg;
+  }
+
+  /* Nav item */
+  .nav-item {
+    @apply flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-sm text-[#4A5B6B] hover:text-[#0E7C86] hover:bg-[#F4F9FB] transition-colors;
+  }
+  .nav-item-active {
+    @apply text-[#0E7C86] bg-[#F4F9FB];
+  }
+
+  /* Page header */
+  .page-header {
+    @apply mb-6 pb-4 border-b border-[#D6E4EA];
+  }
+  .page-title {
+    @apply text-2xl font-black text-[#12324A] tracking-tight;
+  }
+  .page-subtitle {
+    @apply text-sm font-medium text-[#4A5B6B] mt-1;
+  }
+
+  /* Toast */
+  .toast {
+    @apply fixed bottom-5 right-5 z-[100] max-w-sm w-full shadow-2xl rounded-2xl p-4 flex items-start gap-3 border;
+    animation: slide-in 0.2s ease-out;
+  }
+  .toast-success { @apply bg-[#E0F2E8] border-[#23764E] text-[#12324A]; }
+  .toast-error   { @apply bg-[#FCE6E3] border-[#C62F2F] text-[#12324A]; }
+  .toast-info    { @apply bg-[#E8F4F8] border-[#0E7C86] text-[#12324A]; }
+  .toast-warn    { @apply bg-[#FBEFD6] border-[#B7740A] text-[#12324A]; }
+
+  /* Priority lane header */
+  .lane-header-immediate { @apply bg-[#FCE6E3] text-[#C62F2F] border-b-2 border-[#C62F2F]; }
+  .lane-header-soon      { @apply bg-[#FBEFD6] text-[#B7740A] border-b-2 border-[#B7740A]; }
+  .lane-header-routine   { @apply bg-[#E0F2E8] text-[#23764E] border-b-2 border-[#23764E]; }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply bg-gradient-to-r from-[#D6E4EA] via-[#E8F0F4] to-[#D6E4EA] rounded-xl animate-pulse;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/* ── Animations ────────────────────────────────── */
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes ecg-draw {
+  from { stroke-dashoffset: 800; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes pulse-heart {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50%       { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes float-cross {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+  50%  { transform: translateY(-18px) rotate(8deg); opacity: 0.7; }
+  100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.ecg-line {
+  stroke-dasharray: 800;
+  animation: ecg-draw 3s linear infinite;
+}
+
+.pulse-heart { animation: pulse-heart 2s ease-in-out infinite; }
+
+.float-cross { animation: float-cross 4s ease-in-out infinite; }
+.float-cross:nth-child(2) { animation-delay: 1.3s; animation-duration: 5.5s; }
+.float-cross:nth-child(3) { animation-delay: 2.7s; animation-duration: 4.8s; }
+
+.gradient-bg {
+  background: linear-gradient(135deg, #0E7C86 0%, #1a5276 50%, #0B6770 100%);
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ecg-line, .pulse-heart, .float-cross, .gradient-bg, .skeleton { animation: none !important; }
+}
+
+/* ── Print Styles ──────────────────────────────── */
+@media print {
+  body * { visibility: hidden; }
+  .print-token, .print-token * { visibility: visible; }
+  .print-token {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    padding: 20px;
+    background: white;
+  }
+  .no-print { display: none !important; }
+}

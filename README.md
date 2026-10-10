@@ -6,7 +6,7 @@ OPD Flow is a fast, offline-first, client-side web application designed to solve
 
 It provides an explainable, rules-based advisory decision support system to empower nurses, clerks, and doctors, ensuring that critical patients are identified and treated immediately, while routine cases wait safely.
 
-![OPD Flow Architecture](https://niftyhms.com/blog/what-are-the-best-ways-to-improve-patient-flow-in-an-opd-clinic/)
+![OPD Flow Architecture](https://niftyhms.com/wp-content/uploads/2024/10/What-are-the-Best-Ways-to-Improve-Patient-Flow-in-an-OPD-Clinic.jpg)
 
 > **Note:** This is an ADVISORY decision support prototype. It is NOT a diagnosis tool. It runs entirely on fictional sample data. 
 
